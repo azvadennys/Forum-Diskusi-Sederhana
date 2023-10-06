@@ -13,8 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::create('materis', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->timestamps();
+        });
         Schema::create('diskusis', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('materi_id');
+            $table->foreign('materi_id')->references('id')->on('materis')->onDelete('cascade')->cascadeOnUpdate();
             $table->string('nama');
             $table->longText('pesan');
             $table->timestamps();
@@ -29,5 +36,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('diskusis');
+        Schema::dropIfExists('materis');
     }
 };

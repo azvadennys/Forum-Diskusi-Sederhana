@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\balasan;
 use App\Models\diskusi;
+use App\Models\materi;
 use Illuminate\Http\Request;
 
 class diskusiControler extends Controller
@@ -13,15 +14,24 @@ class diskusiControler extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         $data = [
-            'diskusi' => diskusi::orderby('created_at', 'desc')->get(),
+            'diskusi' => diskusi::where('materi_id', $id)->orderby('created_at', 'desc')->get(),
+            'materi_id' => $id,
         ];
         // dd($data);
         return view('index', $data);
     }
 
+    public function materi()
+    {
+        $data = [
+            'materi' => materi::all(),
+        ];
+        // dd($data);
+        return view('materiindex', $data);
+    }
     /**
      * Show the form for creating a new resource.
      *

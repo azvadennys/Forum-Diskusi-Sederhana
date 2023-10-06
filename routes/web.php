@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('index');
 // });
-Route::get('/', [diskusiControler::class, 'index'])->name('/');
+Route::get('/', [diskusiControler::class, 'materi'])->name('/');
 Route::post('/', [diskusiControler::class, 'store'])->name('diskusi.tambah');
+Route::get('/detail/materi/{id}', [diskusiControler::class, 'index'])->name('diskusi.materi');
 Route::get('/detail/{id}', [diskusiControler::class, 'show'])->name('diskusi.detail');
 Route::post('/detail/balasan', [balasanControler::class, 'store'])->name('balasan.tambah');

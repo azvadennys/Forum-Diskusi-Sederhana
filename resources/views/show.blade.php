@@ -6,7 +6,8 @@
             <div class="card">
                 <div class="card-body p-4">
                     <div class="form-outline mb-4 ">
-                        <a href="{{ route('/') }}" type="button" class="btn btn-info text-center">Kembali</a>
+                        <a href="{{ route('diskusi.materi', $diskusi->materi_id) }}" type="button"
+                            class="btn btn-info text-center">Kembali</a>
                     </div>
                     <div class="row">
                         <div class="col">
@@ -23,8 +24,7 @@
                                                     reply</span></a>
                                         </div>
                                         <p class="small mb-0">
-                                            It is a long established fact that a reader will be distracted by
-                                            the readable content of a page.
+                                            {{ $diskusi->pesan }}
                                         </p>
                                     </div>
                                     @foreach ($diskusi->balasan as $item)

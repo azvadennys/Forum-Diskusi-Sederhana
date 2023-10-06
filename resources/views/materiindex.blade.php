@@ -6,32 +6,19 @@
             <div class="card shadow-0 border" style="background-color: #f0f2f5;">
                 <div class="card-body p-4">
                     <div class="form-outline mb-4 text-center">
-                        <a class="btn btn-info" href="{{ route('/') }}">Kembali</a>
-                        <button type="button" class="btn btn-primary text-center" data-mdb-toggle="modal"
-                            data-mdb-target="#exampleModal">+ Buat Diskusi</button>
+                        <h3>List Materi Diskusi</h3>
                     </div>
-                    @foreach ($diskusi as $item)
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h4>{{ $item->nama }}</h4>
-                                <p>{{ $item->pesan }}</p>
-
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex flex-row align-items-center">
-
-                                        <p class="small mt-2">{{ $item->created_at->diffForHumans() }}</p>
-                                    </div>
-                                    <div class="d-flex flex-row align-items-center">
-                                        <a href="{{ route('diskusi.detail', $item->id) }}" class=""><i
-                                                class="fas fa-reply me-1"></i> Reply
-                                            ({{ $item->balasan->count() }})
-                                        </a>
-                                    </div>
-
+                    <ol class="list-group list-group-numbered">
+                        @foreach ($materi as $item)
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Materi {{ $item->id }}</div>
+                                    <a href="{{ route('diskusi.materi', $item->id) }}"> {{ $item->nama }}</a>
                                 </div>
-                            </div>
-                        </div>
-                    @endforeach
+                                <span class="badge my-auto bg-primary rounded-pill">{{ $item->diskusi->count() }}</span>
+                            </li>
+                        @endforeach
+                    </ol>
                 </div>
             </div>
         </div>
@@ -54,8 +41,6 @@
                             <textarea class="form-control" id="textAreaExample" name="pesan" rows="4" required></textarea>
                             <label class="form-label" for="textAreaExample">Pesan</label>
                         </div>
-                        <input type="text" name="materi_id" value="{{ $materi_id }}" class="form-control" required
-                            hidden />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
